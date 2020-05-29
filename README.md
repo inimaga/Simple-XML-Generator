@@ -3,8 +3,8 @@
 ## About
  A GUI application built using Python that allows for the easy generation of XML files. It was built for a specific usecase for the Marketing department at STL Partners.
  
-## Video Demo
-<iframe title="vimeo-player" src="https://player.vimeo.com/video/424007973" width="640" height="400" frameborder="0" allowfullscreen></iframe>
+## Quick 1min Video Demo
+https://vimeo.com/424007973
 
 ## Dependencies
 * PySimpleGui (https://github.com/PySimpleGUI/PySimpleGUI | http://www.pysimplegui.org/)
