@@ -6,6 +6,11 @@
 ## Quick 1min Video Demo
 https://vimeo.com/424007973
 
+## Download Links of executable files
+* Simple XML generator v0.1 - windows x64 executable
+	* [Primary download Link](https://www.dropbox.com/s/6qnlgaurz3r6hhd/Simple%20XML%20Generator%20-%20v0.1.exe?dl=0)
+	*  [Alternative download link](https://github.com/inimaga/Simple-XML-Generator/releases)
+
 ## Dependencies
 * PySimpleGui (https://github.com/PySimpleGUI/PySimpleGUI | http://www.pysimplegui.org/)
 
