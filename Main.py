@@ -45,6 +45,7 @@ layout = [
             [sg.Text('Publication Date', size=(hfs, 1)), sg.CalendarButton('Choose Date', target='calInput', no_titlebar=False), sg.Text('Undefined', size=(hfs*2, 1), key="dateShown"), sg.InputText(key='calInput', visible=False, enable_events=True)],
             #NB: For some reason, the attribute 'no_titlebar' is necessary. The program will not work otherwise
             [sg.Text('Document ID', size=(hfs, 1)), sg.InputText( key='docIDinput', enable_events=True )],
+            [sg.Text('Parent ID', size=(hfs, 1)), sg.InputText( key='docParIDinput', enable_events=True )],
             [sg.Text('Files', size=(hfs, 1)), sg.Text('undefined.pdf', key="fileName", size=(hfs*2, 1))],
             [sg.Text('Publisher', size=(hfs, 1)), sg.InputText('STL Partners',key='publisher')],
             [sg.Text('Save location', size=(hfs, 1)), sg.FolderBrowse(target='-USER FOLDER-'), sg.Text('(Same as folder containing application by default)', key="pathShown", size=(hfs*2, 1)), sg.InputText(path.dirname(__file__),key='-USER FOLDER-', visible=False, enable_events=True)],
@@ -53,13 +54,14 @@ layout = [
 
 # Creation of the Main Window
 xml_icon = path.join(path.dirname(__file__),'xml.ico')
-window = sg.Window('Simple XML Generator - (Custom GUI app for STL Partners) - v0.1', layout, icon=xml_icon)
+window = sg.Window('Simple XML Generator - (Custom GUI app for STL Partners) - v0.2', layout, icon=xml_icon)
 
 fileName  = "generated.xml" #Variable representing the name of file to save
 
 # Instatiation of a Dictionary representing the properties of the XML file
 documentProperties = {
     "documentid":"",
+    "parent_id":"",
     "title":"",
     "author":"",
     "publisher":"",
@@ -78,13 +80,14 @@ documentProperties = {
 # A function that updates the document properties 
 def updateDocProperties():
     documentProperties["documentid"] = values['docIDinput']
+    documentProperties["parent_id"] = values['docParIDinput']
     documentProperties["title"] = values['title']
-    documentProperties["description"] = values['des'].rstrip('\n')
+    documentProperties["description"] = "<![CDATA[" + values['des'].rstrip('\n') + "]]>"
     documentProperties["module1"] = values['mod1']
     documentProperties["module2"] = values['mod2']
-    documentProperties["companies"] = values['company']
-    documentProperties["countries"] = values['country']
-    documentProperties["keywords"] = values['kwds']
+    documentProperties["companies"] = reEncode4XML(values['company'])
+    documentProperties["countries"] = reEncode4XML(values['country'])
+    documentProperties["keywords"] = reEncode4XML(values['kwds'])
     documentProperties["author"] = values['author']
     documentProperties["publisher"] = values['publisher']
     documentProperties["files"] = values['docIDinput']+".pdf"
@@ -105,6 +108,15 @@ def updateDocProperties():
             selectedBoxes.append(i)
     documentProperties["themearianet"] = ",".join(str(w) for w in selectedBoxes)
     #
+
+#Function that re-encodes values
+def reEncode4XML(toReEncode):
+    toReEncode = toReEncode.replace('&', '&amp;')
+    toReEncode = toReEncode.replace('<', '&lt;')
+    toReEncode = toReEncode.replace('>', '&gt;')
+    toReEncode = toReEncode.replace("'", "&apos;")
+
+    return toReEncode
 
 #Function for converting the dictionary with the file properties and saving it to an XML format
 def save_XML(saveLocation):
@@ -151,6 +163,11 @@ while True:
     elif event == 'docIDinput' and values['docIDinput'] and values['docIDinput'][-1] not in ('0123456789.'):
         # If last character in input element is invalid, remove it
         window['docIDinput'].update(values['docIDinput'][:-1])
+        #print(documentProperties)
+    
+    elif event == 'docParIDinput' and values['docParIDinput'] and values['docParIDinput'][-1] not in ('0123456789.'):
+        # If last character in input element is invalid, remove it
+        window['docParIDinput'].update(values['docParIDinput'][:-1])
         #print(documentProperties)
 
     if event == 'docIDinput':
