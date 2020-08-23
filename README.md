@@ -7,8 +7,8 @@
 https://vimeo.com/424007973
 
 ## Download Links of executable files
-* Simple XML generator v0.1 - windows x64 executable
-	* [Primary download Link](https://dl.dropbox.com/s/6qnlgaurz3r6hhd/Simple%20XML%20Generator%20-%20v0.1.exe?dl=0)
+* Simple XML generator v0.2 - windows x64 executable
+	* [Primary download Link](https://dl.dropbox.com/s/re7deljmhet48zi/Simple%20XML%20Generator.exe?dl=0)
 	*  [Alternative download link](https://github.com/inimaga/Simple-XML-Generator/releases)
 
 ## Dependencies

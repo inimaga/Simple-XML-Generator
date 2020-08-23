@@ -54,7 +54,7 @@ layout = [
 
 # Creation of the Main Window
 xml_icon = path.join(path.dirname(__file__),'xml.ico')
-window = sg.Window('Simple XML Generator - (Custom GUI app for STL Partners) - v0.2', layout, icon=xml_icon)
+window = sg.Window('Simple XML Generator - (Custom GUI app for STL Partners) - By IssaNimaga - v0.2', layout, icon=xml_icon)
 
 fileName  = "generated.xml" #Variable representing the name of file to save
 
